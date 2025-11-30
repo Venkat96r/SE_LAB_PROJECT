@@ -5,8 +5,102 @@
 A robust solution that uses Optical Character Recognition (OCR) to seamlessly extract text from scanned documents, intelligently auto-fill digital forms, and verify the extracted data.
 Unlike most solutions that depend on cloud services or large models, our system can run fully offline, even on low-end computers. This makes it especially useful for adoption in remote areas without reliable network connectivity, ensuring accessibility and ease of setup anywhere.
 
-## Walkthrough Video of  Our Solution
+
+## Walkthrough Video of Our Solution
 [Youtube Link](https://youtu.be/kdGyAwhMve0)
+
+## Folder Structure
+
+```
+SE_LAB_PROJECT/
+│   Dockerfile
+│   entrypoint.sh
+│   README.md
+│
+├── backend/
+│   ├── requirements.txt
+│   ├── uploads/
+│   ├── postman_collection/
+│   │   └── OCR Postman.json
+│   ├── tests/
+│   │   └── test_phocr_output.py
+│   └── app/
+│       ├── main.py
+│       ├── mappingfinal.ipynb
+│       ├── mappingfinal.py
+│       ├── api/
+│       │   └── ocr_controller.py
+│       ├── dto/
+│       │   └── models.py
+│       ├── llm_integration/
+│       │   └── llm.py
+│       ├── ocr_modules/
+│       │   └── modules.py
+│       ├── services/
+│       │   └── services.py
+│       └── utils/
+│           ├── image_utils.py
+│           ├── pdf_utils.py
+│           ├── quality_utils.py
+│           └── test_utils.oy
+│
+├── frontend/
+│   ├── package.json
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   └── src/
+│       ├── App.js
+│       ├── App.css
+│       ├── Ocr.js
+│       ├── components/
+│       │   ├── batch/
+│       │   │   └── BatchResults.js
+│       │   ├── common/
+│       │   │   ├── ErrorDisplay.js
+│       │   │   ├── FormField.js
+│       │   │   └── TabButton.js
+│       │   ├── detection/
+│       │   │   ├── ConfidenceOverlay.js
+│       │   │   └── EnhancedConfidenceOverlay.js
+│       │   ├── multipage/
+│       │   │   ├── MultipageExtraction.js
+│       │   │   └── PageNavigation.js
+│       │   ├── results/
+│       │   │   └── UnifiedMultipageResults.js
+│       │   ├── tabs/
+│       │   │   ├── ExtractionTab.js
+│       │   │   ├── HandwritingTab1.js
+│       │   │   ├── MultiImageResults.js
+│       │   │   ├── UnifiedResultsComponent.js
+│       │   │   └── VerificationTab.js
+│       │   ├── upload/
+│       │   │   ├── CameraCapture.js
+│       │   │   └── FileUploadArea.js
+│       │   └── verification/
+│       │       ├── DataEntryForm.js
+│       │       └── VerificationResults.js
+│       ├── constants/
+│       │   ├── fields.js
+│       │   └── styles.js
+│       ├── hooks/
+│       │   ├── useBatchOCR.js
+│       │   ├── useCamera.js
+│       │   ├── useFileUpload.js
+│       │   ├── useFormData.js
+│       │   ├── useMultiImageOCR.js
+│       │   ├── useMultipageOCR.js
+│       │   ├── useMultipagePdf.js
+│       │   ├── useOCRDetection.js
+│       │   ├── useOCRExtraction.js
+│       │   ├── useUnifiedExtraction.js
+│       │   └── useVerification.js
+│       └── utils/
+│           ├── apiService.js
+│           └── errorHandling.js
+```
+
 
 
 
@@ -139,103 +233,93 @@ The results are shown in the graph below.
   
 ## Getting Started 
  ### Here is the [link](https://youtu.be/L9iFKjycY8Q) for full setup video of our solution.
- ### Backend Setup:
- **Option A** (Without Docker): For developers  who want to look at the code directly and make the changes to code.
- - ### Prerequisites:
- > **Note:** The project **must** be run on **Windows** or **Linux** systems. Other operating systems are not supported.
-
-Make sure the following are installed before running the project:
-
-- **Python 3.10+**  
-  Required for the FastAPI backend.
-
-- **pip**  
-  Comes with most Python installations. Used to install Python dependencies.
-
-
-- **Node.js (v18+) & npm**  
-  Needed to build and run the React frontend.
-
-- **Git**  
-  To clone the repository.
- - **Docker**(Optional for deploying the backend): For running the application in container.
-
- - ### Installation:
-  1. Clone the Repository:
-
- ```bash
-
 git clone https://github.com/KrishnaChaitanya16/MosipDecode2025.git
-```
-2.  Move to the backend folder :
-``` bash
-cd backend
-```
-3. Create and Activate  Virtual Python Environment;
-```bash
-python3 -m venv .venv
-```
-- Activation for Windows run the following command:
-		- ``` 
-		 .venv\Scripts\Activate
-		 ```
-- Activation in Linux :
-		- ``` .venv\Scripts\Activate```
-4. Install requirements for backend:
-``` bash
-pip install -r requirements.txt
-```
-Now before running the main OCR backend server , setup the LLM server:
+### Backend Setup
 
-5. From backend move to app directory
-``` bash 
-cd app
-```
-6. Now start the LLM server:
-> Note : before starting the LLM server , make sure Ollama CLI is installed and up and running. Steps given below:
-> Our backend uses **Ollama** to run the Qwen2.5-1.5B-Instruct model fully offline.
-  - Ollama setup :
-    Download and install [Ollama](https://ollama.com/download) from the official site
-    1. After installation verify Ollama is working by using the command in main terminal:
-    ``` bash 
+#### Option A: (Without Docker)
+For developers who want to run and modify the code directly.
+
+**Prerequisites:**
+- Python 3.10+
+- pip
+- Node.js (v18+) & npm
+- Git
+- Docker (optional, for containerized deployment)
+
+**Installation:**
+1. Clone the repository:
+  ```bash
+  git clone https://github.com/KrishnaChaitanya16/MosipDecode2025.git
+  cd SE_LAB_PROJECT
+  ```
+2. Move to the backend folder:
+  ```bash
+  cd backend
+  ```
+3. Create and activate a Python virtual environment:
+  ```bash
+  python -m venv .venv
+  # On Windows:
+  .venv\Scripts\activate
+  # On Linux:
+  source .venv/bin/activate
+  ```
+4. Install backend requirements:
+  ```bash
+  pip install -r requirements.txt
+  ```
+5. (Optional) Set up Ollama for LLM integration:
+  - Download and install [Ollama](https://ollama.com/download)
+  - Verify installation:
+    ```bash
     ollama --version
     ```
-     2.  Pull the Qwen2.5 Model:
-      ``` bash
-      ollama pull qwen2.5:1.5b
-      ```
-      3. verify the download :
-      ``` bash 
-      ollama list
-      ```
-      You should see `qwen2.5:1.5b` in the list.
- - Run the LLM server code:
-    In the ``` backend/app``` folder:
-    ``` bash
-    python3 mappingfinal.py
+  - Pull the Qwen2.5 model:
+    ```bash
+    ollama pull qwen2.5:1.5b
+    ollama list
+    # Ensure 'qwen2.5:1.5b' appears in the list
     ```
-    You  must see something like this :
-   <img width="1325" height="265" alt="image" src="https://github.com/user-attachments/assets/4c4aa233-1e63-4395-b125-0fbd03452b0d" />
-
-
-
-
-7. Setting up the main backend server:
-  Make sure ``` mappingfinal.py``` is running . Open a new terminal and navigate to ``` backend/``` folder :
-
-  > Ensure the python vitual virtual environment is activated in ``` backend/``` folder inside the new terminal before proceeding
-  ``` bash
+6. Start the LLM server (in backend/app):
+  ```bash
+  cd app
+  python mappingfinal.py
+  ```
+7. In a new terminal, activate the virtual environment and start the FastAPI backend:
+  ```bash
+  cd backend
+  .venv\Scripts\activate  # (if not already activated)
   uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
   ```
-  Now you should see Some thing like this :
-  <img width="1272" height="400" alt="Screenshot 2025-10-05 215710" src="https://github.com/user-attachments/assets/e7500ad7-4d05-454d-b685-abfd5d7f5329" />
 
+#### Option B: (With Docker)
+For quick setup or deployment.
 
-After this backend  is Ready.
+1. Ensure Docker is installed and running.
+2. Pull the prebuilt image:
+  ```bash
+  docker pull venkat96r/ocr_backend:latest
+  docker run -d -p 8000:8000 venkat96r/ocr_backend:latest
+  ```
+3. Or build the image locally:
+  ```bash
+  docker build -t ocr_backend:latest .
+  docker run -d -p 8000:8000 ocr_backend:latest
+  ```
 
-**Option B** : For quick Setup or deploying the service and use it in real-word applications.
-Ensure Docker is  installed and running in the background, also ensure Internet connectivity for building the image , first run of the image.
-
+### Frontend Setup
+1. Move to the frontend folder:
+  ```bash
+  cd frontend
+  ```
+2. Install dependencies:
+  ```bash
+  npm install
+  ```
+3. Start the frontend:
+  ```bash
+  npm start
+  ```
 
 
 **Without building the image locally**:
@@ -266,20 +350,7 @@ docker run -d -p 8000:8000 ocr_backend:latest
 ```
 
 
-### Frontend Setup:
-After Successfully setting up the backend  either with Docker or without it . To setup the frontend follow the below steps:
-1. Move to the frontend folder:
- ``` bash 
-  cd frontend
-  ```
-  2. Install the dependencies:
-  ``` bash
-  npm install
-  ```
-  3. Run the frontend:
-  ``` bash
-  npm start
-  ```
+
 
 
 
