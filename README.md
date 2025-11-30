@@ -1,3 +1,7 @@
+## Test Cases
+
+Test cases for the backend are located in the `backend/tests/` directory. Currently, these are dummy tests provided as placeholders. You can expand or replace them with real tests as you develop and enhance the backend functionality.
+
 
 
 # Optical Character Recognition (OCR) for Text Extraction and Verification
