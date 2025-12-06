@@ -229,6 +229,8 @@ Verifies the extraction of a comprehensive set of standard English fields in a c
 Tests the extraction of multi-line, structured, and challenging regional data formats.
 
 ### Quality and Verification( \verify endpoint) Test Cases
+These 8 tests validate the Pre-Processing Module and the Data Verification API.
+
 **8. Image Quality Analysis & Rejection: Module/Negative Testing:**
 Sends a known poor-quality, blurred image (2.png) to the /extract endpoint. It asserts that the API returns the expected detailed JSON error structure and a non-200 status (validating the Image Quality Analysis feature). This ensures that our system handles the edge cases which involve poor quality images.
 
