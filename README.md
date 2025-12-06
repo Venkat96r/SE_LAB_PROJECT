@@ -18,6 +18,9 @@ Unlike most solutions that depend on cloud services or large models, our system 
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
+- [Test Case Explanation](#test-case-explanation)
+  -[Extraction Test Cases (/extract Endpoint)](#extraction-test-cases-extract-endpoint)
+  -[Quality and Verification( \verify endpoint) Test Cases](#quality-and-verification-verify-endpoint-test-cases)
 - [API Documentation](#api-documentation)
   - [1. OCR Extraction API](#1-ocr-extraction-api)
   - [2. Data Verification API](#2-data-verification-api)
@@ -135,9 +138,6 @@ The results are shown in the graph below.
 
   
 ## Getting Started 
- ### Here is the [link](https://youtu.be/L9iFKjycY8Q) for full setup video of our solution.
-git clone https://github.com/KrishnaChaitanya16/MosipDecode2025.git
-
 ### Backend Setup
 
 **Prerequisites:**
@@ -150,8 +150,7 @@ git clone https://github.com/KrishnaChaitanya16/MosipDecode2025.git
 **Installation:**
 1. Clone the repository:
   ```bash
-  git clone https://github.com/KrishnaChaitanya16/MosipDecode2025.git
-  cd SE_LAB_PROJECT
+  git clone https://github.com/Venkat96r/SE_LAB_PROJECT.git
   ```
 2. Move to the backend folder:
   ```bash
@@ -202,37 +201,10 @@ git clone https://github.com/KrishnaChaitanya16/MosipDecode2025.git
   ```
 
 
-**Without building the image locally**:
-	
-	docker pull venkat96r/ocr_backend:latest
-	
-	
-After the pull is you should see something like this:
-
-- Run the image :
-	
-	``` 
-	docker run -d -p 8000:8000 venkat96r/ocr_backend:latest
-	```
-After the successful run you should see something like this:
-
-**If you want to build the image locally**:
-
-Navigate to the root directory and run the follwoing command:
-
-``` bash
-docker build -t ocr_backend:latest .
-```
-To run the image:
-
-``` bash
-docker run -d -p 8000:8000 ocr_backend:latest
-```
-
-### Test Case Explanation:
+## Test Case Explanation:
 The Pytest suite performs 15 atomic tests across two main API endpoints (/extract and /verify) to ensure the reliability and functional completeness of the OCR pipeline, particularly in handling multilingual and poor-quality inputs.
 
-#### Extraction Test Cases (/extract Endpoint)
+### Extraction Test Cases (/extract Endpoint)
 These 7 tests validate the core OCR engine and intelligent mapping against a 60% similarity threshold.
 **1. Extraction - Chinese (Traditional) - Module Test:**
 Tests the ChineseExtractionModule by extracting Name, Age, Gender, DOB, Address, and Country from a document written in Traditional Chinese (1.png). This verifies the model's performance on complex international character sets.
@@ -255,7 +227,7 @@ Verifies the extraction of a comprehensive set of standard English fields in a c
 **7. Extraction - Complex Indian Address/Phone - Integration Test:** 
 Tests the extraction of multi-line, structured, and challenging regional data formats.
 
-#### Quality and Verification( \verify endpoint) Test Cases
+### Quality and Verification( \verify endpoint) Test Cases
 **8. Image Quality Analysis & Rejection: Module/Negative Testing:**
 Sends a known poor-quality, blurred image (2.png) to the /extract endpoint. It asserts that the API returns the expected detailed JSON error structure and a non-200 status (validating the Image Quality Analysis feature). This ensures that our system handles the edge cases which involve poor quality images.
 
