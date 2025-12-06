@@ -19,8 +19,8 @@ Unlike most solutions that depend on cloud services or large models, our system 
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
 - [Test Case Explanation](#test-case-explanation)
-  -[Extraction Test Cases (/extract Endpoint)](#extraction-test-cases-extract-endpoint)
-  -[Quality and Verification( \verify endpoint) Test Cases](#quality-and-verification-verify-endpoint-test-cases)
+  - [Extraction Test Cases (/extract Endpoint)](#extraction-test-cases-extract-endpoint)
+  - [Quality and Verification( \verify endpoint) Test Cases](#quality-and-verification-verify-endpoint-test-cases)
 - [API Documentation](#api-documentation)
   - [1. OCR Extraction API](#1-ocr-extraction-api)
   - [2. Data Verification API](#2-data-verification-api)
@@ -202,10 +202,11 @@ The results are shown in the graph below.
 
 
 ## Test Case Explanation:
-The Pytest suite performs 15 atomic tests across two main API endpoints (/extract and /verify) to ensure the reliability and functional completeness of the OCR pipeline, particularly in handling multilingual and poor-quality inputs.
+The Pytest suite performs 15 tests across two main API endpoints (/extract and /verify) to ensure the reliability and functional completeness of the OCR pipeline, particularly in handling multilingual and poor-quality inputs.
 
 ### Extraction Test Cases (/extract Endpoint)
-These 7 tests validate the core OCR engine and intelligent mapping against a 60% similarity threshold.
+These 7 tests validate the core OCR engine and intelligent mapping.
+
 **1. Extraction - Chinese (Traditional) - Module Test:**
 Tests the ChineseExtractionModule by extracting Name, Age, Gender, DOB, Address, and Country from a document written in Traditional Chinese (1.png). This verifies the model's performance on complex international character sets.
 
@@ -247,7 +248,7 @@ Confirms the verification module's high confidence score for standard English fi
 Validates the verification module's handling of Japanese characters.
 
 **14. Verification - Full English Set: Functional/Verification Test:**
-Validates the verification endpoint's performance on a complete set of clean English data (7.png), serving as a benchmark for the highest achievable overall_confidence.
+Validates the verification endpoint's performance on a complete set of clean English data (7.png).
 
 **15. Verification - Complex Indian Address/Phone: Functional/Verification Test:**
 Verification - Complex Indian Address/Phone: Functional/Verification Test.
