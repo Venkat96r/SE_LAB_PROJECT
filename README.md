@@ -1,9 +1,3 @@
-## Test Cases
-
-Test cases for the backend are located in the `backend/tests/` directory. Currently, these are dummy tests provided as placeholders. You can expand or replace them with real tests as you develop and enhance the backend functionality.
-
-
-
 # Optical Character Recognition (OCR) for Text Extraction and Verification
 
 A robust solution that uses Optical Character Recognition (OCR) to seamlessly extract text from scanned documents, intelligently auto-fill digital forms, and verify the extracted data.
@@ -12,101 +6,6 @@ Unlike most solutions that depend on cloud services or large models, our system 
 
 ## Walkthrough Video of Our Solution
 [Youtube Link](https://youtu.be/kdGyAwhMve0)
-
-## Folder Structure
-
-```
-SE_LAB_PROJECT/
-│   Dockerfile
-│   entrypoint.sh
-│   README.md
-│
-├── backend/
-│   ├── requirements.txt
-│   ├── uploads/
-│   ├── postman_collection/
-│   │   └── OCR Postman.json
-│   ├── tests/
-│   │   └── test_phocr_output.py
-│   └── app/
-│       ├── main.py
-│       ├── mappingfinal.ipynb
-│       ├── mappingfinal.py
-│       ├── api/
-│       │   └── ocr_controller.py
-│       ├── dto/
-│       │   └── models.py
-│       ├── llm_integration/
-│       │   └── llm.py
-│       ├── ocr_modules/
-│       │   └── modules.py
-│       ├── services/
-│       │   └── services.py
-│       └── utils/
-│           ├── image_utils.py
-│           ├── pdf_utils.py
-│           ├── quality_utils.py
-│           └── test_utils.oy
-│
-├── frontend/
-│   ├── package.json
-│   ├── public/
-│   │   ├── index.html
-│   │   ├── manifest.json
-│   │   └── robots.txt
-│   └── src/
-│       ├── App.js
-│       ├── App.css
-│       ├── Ocr.js
-│       ├── components/
-│       │   ├── batch/
-│       │   │   └── BatchResults.js
-│       │   ├── common/
-│       │   │   ├── ErrorDisplay.js
-│       │   │   ├── FormField.js
-│       │   │   └── TabButton.js
-│       │   ├── detection/
-│       │   │   ├── ConfidenceOverlay.js
-│       │   │   └── EnhancedConfidenceOverlay.js
-│       │   ├── multipage/
-│       │   │   ├── MultipageExtraction.js
-│       │   │   └── PageNavigation.js
-│       │   ├── results/
-│       │   │   └── UnifiedMultipageResults.js
-│       │   ├── tabs/
-│       │   │   ├── ExtractionTab.js
-│       │   │   ├── HandwritingTab1.js
-│       │   │   ├── MultiImageResults.js
-│       │   │   ├── UnifiedResultsComponent.js
-│       │   │   └── VerificationTab.js
-│       │   ├── upload/
-│       │   │   ├── CameraCapture.js
-│       │   │   └── FileUploadArea.js
-│       │   └── verification/
-│       │       ├── DataEntryForm.js
-│       │       └── VerificationResults.js
-│       ├── constants/
-│       │   ├── fields.js
-│       │   └── styles.js
-│       ├── hooks/
-│       │   ├── useBatchOCR.js
-│       │   ├── useCamera.js
-│       │   ├── useFileUpload.js
-│       │   ├── useFormData.js
-│       │   ├── useMultiImageOCR.js
-│       │   ├── useMultipageOCR.js
-│       │   ├── useMultipagePdf.js
-│       │   ├── useOCRDetection.js
-│       │   ├── useOCRExtraction.js
-│       │   ├── useUnifiedExtraction.js
-│       │   └── useVerification.js
-│       └── utils/
-│           ├── apiService.js
-│           └── errorHandling.js
-```
-
-
-
 
 ##  Table of Contents
 
@@ -238,10 +137,8 @@ The results are shown in the graph below.
 ## Getting Started 
  ### Here is the [link](https://youtu.be/L9iFKjycY8Q) for full setup video of our solution.
 git clone https://github.com/KrishnaChaitanya16/MosipDecode2025.git
-### Backend Setup
 
-#### Option A: (Without Docker)
-For developers who want to run and modify the code directly.
+### Backend Setup
 
 **Prerequisites:**
 - Python 3.10+
@@ -272,43 +169,22 @@ For developers who want to run and modify the code directly.
   ```bash
   pip install -r requirements.txt
   ```
-5. (Optional) Set up Ollama for LLM integration:
-  - Download and install [Ollama](https://ollama.com/download)
-  - Verify installation:
-    ```bash
-    ollama --version
-    ```
-  - Pull the Qwen2.5 model:
-    ```bash
-    ollama pull qwen2.5:1.5b
-    ollama list
-    # Ensure 'qwen2.5:1.5b' appears in the list
-    ```
-6. Start the LLM server (in backend/app):
-  ```bash
-  cd app
-  python mappingfinal.py
-  ```
-7. In a new terminal, activate the virtual environment and start the FastAPI backend:
-  ```bash
-  cd backend
-  .venv\Scripts\activate  # (if not already activated)
-  uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-  ```
-
-#### Option B: (With Docker)
-For quick setup or deployment.
-
-1. Ensure Docker is installed and running.
-2. Pull the prebuilt image:
+5. Ensure Docker is installed and running.
+6. Pull the prebuilt image:
   ```bash
   docker pull venkat96r/ocr_backend:latest
+  ```
+7. Run the image:
+  ```bash
   docker run -d -p 8000:8000 venkat96r/ocr_backend:latest
   ```
-3. Or build the image locally:
+8. To run the tests, move to the tests folder within backend folder:
   ```bash
-  docker build -t ocr_backend:latest .
-  docker run -d -p 8000:8000 ocr_backend:latest
+  cd tests
+  ```
+9. Run the tests:
+  ```bash
+  pytest test.py
   ```
 
 ### Frontend Setup
@@ -353,36 +229,56 @@ To run the image:
 docker run -d -p 8000:8000 ocr_backend:latest
 ```
 
+### Test Case Explanation:
+The Pytest suite performs 15 atomic tests across two main API endpoints (/extract and /verify) to ensure the reliability and functional completeness of the OCR pipeline, particularly in handling multilingual and poor-quality inputs.
 
+#### Extraction Test Cases (/extract Endpoint)
+These 7 tests validate the core OCR engine and intelligent mapping against a 60% similarity threshold.
+**1. Extraction - Chinese (Traditional) - Module Test:**
+Tests the ChineseExtractionModule by extracting Name, Age, Gender, DOB, Address, and Country from a document written in Traditional Chinese (1.png). This verifies the model's performance on complex international character sets.
 
+**2. Extraction - Complex English Fields - Integration Test:**
+Validates the system's ability to accurately extract structured, complex data types like Phone and Email from an English document (3.png), ensuring fields are parsed correctly despite varying formats. This test case tests the integration between extraction module and field mapping module.
 
+**3. Extraction - Chinese (Simplified) - Module Test:**
+Confirms Non-Latin Language Support by extracting key fields (Name, Gender, DOB, Address) from a document in Simplified Chinese (6.jpeg).
 
+**4. Extraction - Standard English/Latin:**
+Acts as a baseline accuracy test for the core extraction, processing standard Latin-based fields (Name, Age, Gender, DOB, Country) from an English document (4.jpg).
 
+**5. Extraction - Japanese Language - Module Test:**
+Tests the JapaneseExtractionModule by extracting Japanese characters, extracting Name, DOB, Address, and Country (5.jpg).
 
+**6. Extraction - Full English Set:**
+Verifies the extraction of a comprehensive set of standard English fields in a clean document (7.png), validating the complexity handled by the LLM mapping.
 
+**7. Extraction - Complex Indian Address/Phone - Integration Test:** 
+Tests the extraction of multi-line, structured, and challenging regional data formats.
 
+#### Quality and Verification( \verify endpoint) Test Cases
+**8. Image Quality Analysis & Rejection: Module/Negative Testing:**
+Sends a known poor-quality, blurred image (2.png) to the /extract endpoint. It asserts that the API returns the expected detailed JSON error structure and a non-200 status (validating the Image Quality Analysis feature). This ensures that our system handles the edge cases which involve poor quality images.
 
+**9. Verification - Chinese (Traditional):**
+Tests the Data Verification API by submitting the expected Traditional Chinese fields against the image (1.png)
 
+**10. Verification - Complex English: Functional/Verification Test:**
+Verifies the verification module's accuracy when checking complex English fields (Phone, Email) against the extracted data from (3.png).
 
+**11. Verification - Chinese (Simplified): Functional/Verification Test:**
+Tests the verification module's cross-check accuracy for Simplified Chinese fields (6.jpeg).
 
+**12. Verification - Standard English: Functional/Verification Test:**
+Confirms the verification module's high confidence score for standard English fields (4.jpg), ensuring the core verification logic works correctly.
 
+**13. Verification - Japanese Language: Functional/Verification Test:**
+Validates the verification module's handling of Japanese characters.
 
+**14. Verification - Full English Set: Functional/Verification Test:**
+Validates the verification endpoint's performance on a complete set of clean English data (7.png), serving as a benchmark for the highest achievable overall_confidence.
 
-
-	
-	
-			
-	
-	
-
-       
-
-
-		
-	
-
-
-
+**15. Verification - Complex Indian Address/Phone: Functional/Verification Test:**
+Verification - Complex Indian Address/Phone: Functional/Verification Test.
 
 ## API Documentation
 
