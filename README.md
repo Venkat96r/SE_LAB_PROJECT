@@ -7,6 +7,9 @@ Unlike most solutions that depend on cloud services or large models, our system 
 ## Walkthrough Video of Our Solution
 [Youtube Link](https://youtu.be/kdGyAwhMve0)
 
+## Project Report Link
+[PDF Link](https://drive.google.com/file/d/1xuru5X1wfXgDTmBefvydxK9IY9Xc0ppL/view?usp=sharing)
+
 ##  Table of Contents
 
 - [Problem Statement](#problem-statement)
