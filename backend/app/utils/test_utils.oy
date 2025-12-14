@@ -1,4 +1,0 @@
-def extract_email(t): return None
-def extract_phone(t): return None
-def extract_age(t):   return None
-def normalize_value(v): return v
